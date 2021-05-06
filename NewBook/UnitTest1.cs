@@ -80,8 +80,4 @@ namespace NewBook
             Assert.AreEqual("https://newbookmodels.com/explore", result);
         }
     }
-    public class AccountSettings
-    {
-
-    }
 }
