@@ -17,21 +17,6 @@ namespace NewBook
         private static readonly By _insdustryListField = By.CssSelector("[role='option']");
         private static readonly By _nextButton = By.CssSelector("[type = submit]");
 
-        //var companyName = _webDriver.FindElement(By.CssSelector("[name = 'company_name']"));
-        //companyName.SendKeys("Julia");
-        //    var companyWebsite = _webDriver.FindElement(By.CssSelector("[name = 'company_website']"));
-        //companyWebsite.SendKeys("julia.com");
-        //    var address = _webDriver.FindElement(By.CssSelector("[name = 'location']"));
-        //address.SendKeys("1");
-
-        //    System.Threading.Thread.Sleep(2000);
-        //    _webDriver.FindElements(By.CssSelector("[class^='pac-matched']"))[0].Click();
-
-
-        //_webDriver.FindElement(By.CssSelector("[name='industry']")).Click();
-        //_webDriver.FindElements(By.CssSelector("[role='option']"))[0].Click();
-        //System.Threading.Thread.Sleep(4000);
-        //    _webDriver.FindElement(By.CssSelector("[type = submit]")).Click();
         public SignUpCompanyPage(IWebDriver webDriver)
         {
             _webDriver = webDriver;
