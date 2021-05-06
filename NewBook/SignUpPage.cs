@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NewBook
 {
-    class SignUpPage
+    public class SignUpPage
     {
         private readonly IWebDriver _webDriver;
 
@@ -33,31 +33,37 @@ namespace NewBook
             _webDriver.FindElement(_nameField).SendKeys(name);
             return this;
         }
+
         public SignUpPage SetLastName(string lastName)
         {
             _webDriver.FindElement(_lastNameField).SendKeys(lastName);
             return this;
         }
+
         public SignUpPage SetEmail(string email)
         {
             _webDriver.FindElement(_emailField).SendKeys(email);
             return this;
         }
+
         public SignUpPage SetPassword(string password)
         {
             _webDriver.FindElement(_passwordField).SendKeys(password);
             return this;
         }
+
         public SignUpPage SetPasswordConfirm(string passwordConfirm)
         {
             _webDriver.FindElement(_passwordConfirmField).SendKeys(passwordConfirm);
             return this;
         }
+
         public SignUpPage SetNumber(string number)
         {
             _webDriver.FindElement(_numberField).SendKeys(number);
             return this;
         }
+
         public void ClickRegistrationButton()
         {
             _webDriver.FindElement(_registrationButton).Click();
