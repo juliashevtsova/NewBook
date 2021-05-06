@@ -85,4 +85,8 @@ namespace NewBook
 
         }
     }
+    public class ProfileChange
+    {
+
+    }
 }
