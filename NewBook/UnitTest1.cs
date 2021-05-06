@@ -8,8 +8,7 @@ using WebDriverManager.Helpers;
 
 
 namespace NewBook
-{
-    public class RegistrationTests
+{    public class RegistrationTest
     {
         private IWebDriver _webDriver;
         [SetUp]
@@ -70,22 +69,18 @@ namespace NewBook
         [Test]
         public void InputValidLogin()
         {
-            _webDriver.Navigate().GoToUrl("https://newbookmodels.com/auth/signin");
-
-            _webDriver.FindElement(By.CssSelector("[name = email]")).SendKeys("shevi@gmail.com");
-            _webDriver.FindElement(By.CssSelector("[name = password]")).SendKeys("rfrfirf28091999juliaA!");
-            
-            _webDriver.FindElement(By.CssSelector("[type = submit]")).Click();
-
-            System.Threading.Thread.Sleep(2000);
+            var signInPage = new SignInPage(_webDriver);
+            signInPage.OpenSignInPage()
+                .InputEmail("iulishev1@gmail.com")
+                .InputPassword("julia28091999A!")
+                .ClickLogInButton();
 
             var result = _webDriver.Url;
 
-            Assert.AreEqual("https://newbookmodels.com/join/company?goBackUrl=%2Fexplore", result);
-
+            Assert.AreEqual("https://newbookmodels.com/explore", result);
         }
     }
-    public class ProfileChange
+    public class AccountSettings
     {
 
     }
