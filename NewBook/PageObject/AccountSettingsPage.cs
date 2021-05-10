@@ -14,6 +14,13 @@ namespace NewBook
         private static readonly By _passwordButton = By.CssSelector("[nb-account-info-password .edit-switcher__icon_type_edit]");
         private static readonly By _phoneNumber = By.CssSelector("[nb-account-info-phone. edit-switcher__icon_type_edit]");
         private static readonly By _logOut = By.CssSelector("[type=logout]");
+        private static readonly By _windowVerification = By.CssSelector("common-resend-email div[class = modal__close]");
+        private static readonly By _name = By.CssSelector("input[class*=nput__self_type_text-underline]");
+        private static readonly By _avatarClient = By.CssSelector("input[class*=nput__self_type_text-underline]")
+
+        private static readonly By _lastName = By.CssSelector("input[class*=nput__self_type_text-underline]");
+        private static readonly By _saveButton = By.CssSelector("button[class*=button_type_default]");
+       
         public AccountSettingsPage(IWebDriver webDriver)
         {
             _webDriver = webDriver;
@@ -24,10 +31,22 @@ namespace NewBook
             _webDriver.Navigate().GoToUrl("https://newbookmodels.com/auth/signin");
             return this;
         }
-
-        public void ChangeGeneralInfo()
+        public AccountSettingsPage ChangeName(string name)
         {
-            _webDriver.FindElement(_generalInfoButton).Click();
+            _webDriver.FindElements(_name)[0].Clear();
+            _webDriver.FindElements(_name)[0].SendKeys(name);
+            return this;
+        }
+        public AccountSettingsPage ChangeLastName(string lastName)
+        {
+            _webDriver.FindElements(_lastName)[1].Clear();
+            _webDriver.FindElements(_lastName)[1].SendKeys(lastName);
+            return this;
+        }
+       
+        public void ClickCloseWindowVerification()
+        {
+            _webDriver.FindElement(_windowVerification).Click();
         }
         public void ChangeEmailAddress()
         {
@@ -45,11 +64,15 @@ namespace NewBook
         {
             _webDriver.FindElement(_logOut).Click();
         }
+        public void ClickSaveButton()
+        {
+            _webDriver.FindElements(_saveButton)[0].Click();
+        }
         public void LogIn()
         {
             SignInPage logIn = new SignInPage(_webDriver);
             logIn.OpenSignInPage()
-                .InputEmail("iulishev1@gmail.com")
+                .InputEmail("juliasjdlnc@gmail.com")
                 .InputPassword("julia28091999A!")
                 .ClickLogInButton();
         }
