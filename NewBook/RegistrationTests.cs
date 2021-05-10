@@ -8,7 +8,8 @@ using WebDriverManager.Helpers;
 
 
 namespace NewBook
-{    public class RegistrationTest
+{
+    public class RegistrationTests
     {
         private IWebDriver _webDriver;
         [SetUp]
@@ -54,7 +55,7 @@ namespace NewBook
             Assert.AreEqual("https://newbookmodels.com/explore", result);
         }
     }
-    public class LoginTests
+    public class AccountSettings
     {
         private IWebDriver _webDriver;
         [SetUp]
@@ -62,22 +63,27 @@ namespace NewBook
         {
             new DriverManager().SetUpDriver(new ChromeConfig(), VersionResolveStrategy.MatchingBrowser);
             _webDriver = new ChromeDriver();
-            _webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
-            _webDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(60);
+            _webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(7);
+            _webDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(20000);
         }
 
         [Test]
-        public void InputValidLogin()
+        public void InputValidFirstData()
         {
-            var signInPage = new SignInPage(_webDriver);
-            signInPage.OpenSignInPage()
-                .InputEmail("iulishev1@gmail.com")
-                .InputPassword("julia28091999A!")
-                .ClickLogInButton();
+            var signUpPage = new SignUpPage(_webDriver);
+            signUpPage.OpenSignUpPage()
+                .SetName("Julia")
+                .SetLastName("Shevtsova")
+                .SetEmail("julia78shevtsov6@gmail.com")
+                .SetPassword("12345678qQ!")
+                .SetPasswordConfirm("12345678qQ!")
+                .SetNumber("1234567890")
+                .ClickRegistrationButton();
 
             var result = _webDriver.Url;
 
-            Assert.AreEqual("https://newbookmodels.com/explore", result);
+            Assert.AreEqual("https://newbookmodels.com/join/company", result);
         }
+
     }
 }
