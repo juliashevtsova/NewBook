@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NewBook
 {
-    class SignInPage
+    public class SignInPage
     {
         private readonly IWebDriver _webDriver;
 
