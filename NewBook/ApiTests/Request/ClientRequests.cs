@@ -26,6 +26,28 @@ namespace NewBook.ApiTests
 
             return clientChangeEmail.Email;
         }
+
+        public static string SendRequestChangeClientPasswordPost(string password, string newPassword, string token)
+        {
+            var client = new RestClient("https://api.newbookmodels.com/api/v1/password/change/");
+            var request = new RestRequest(Method.POST);
+            var newPasswordModel = new Dictionary<string, string>
+            {
+                { "old_password", password},
+                { "new_password", newPassword},
+            };
+
+            request.AddHeader("content-type", "application/json");
+            request.AddHeader("authorization", token);
+            request.AddJsonBody(newPasswordModel);
+            request.RequestFormat = DataFormat.Json;
+
+            var response = client.Execute(request);
+            var ChangePasswordResponse = JsonConvert.DeserializeObject<ClientChangePassword>(response.Content);
+
+            return ChangePasswordResponse.Token;
+        }
+
         public static string SendRequestChangePhoneNumberPost(string password, string phone_number, string token)
         {
             var client = new RestClient("https://api.newbookmodels.com/api/v1/client/change_phone/");
@@ -46,10 +68,12 @@ namespace NewBook.ApiTests
 
             return clientChangePhoneNumber.phone_number;
         }
-        public static string SendRequestChangeGeneralInformationPost(string first_name, string last_name, string token)
+
+        public static string SendRequestChangeGeneralInformationFirstNamePost(string first_name,string last_name, string token)
         {
-            var client = new RestClient("https://api.newbookmodels.com/api/v1/client/change_phone/");
-            var request = new RestRequest(Method.POST);
+
+            var client = new RestClient("https://api.newbookmodels.com/api/v1/client/self/");
+            var request = new RestRequest(Method.PATCH);
             var newName = new Dictionary<string, string>
             {
                     {"first_name", first_name},
@@ -62,12 +86,31 @@ namespace NewBook.ApiTests
             request.RequestFormat = DataFormat.Json;
 
             var response = client.Execute(request);
-            var clientChangePhoneNumber = JsonConvert.DeserializeObject<CLientChangePhoneNumber>(response.Content);
+            var clientChangeName = JsonConvert.DeserializeObject<ClientChangeName>(response.Content);
 
-            return clientChangePhoneNumber.phone_number;
+            return clientChangeName.FirstName;
+        }
+
+        public static string SendRequestChangeGeneralInformationLastNamePost(string last_name, string token)
+        {
+
+            var client = new RestClient("https://api.newbookmodels.com/api/v1/client/self/");
+            var request = new RestRequest(Method.PATCH);
+            var newLastName = new Dictionary<string, string>
+            {
+                    {"last_name", last_name},
+            };
+
+            request.AddHeader("content-type", "application/json");
+            request.AddHeader("authorization", token);
+            request.AddJsonBody(newLastName);
+            request.RequestFormat = DataFormat.Json;
+
+            var response = client.Execute(request);
+            var clientChangeName = JsonConvert.DeserializeObject<ClientChangeName>(response.Content);
+
+            return clientChangeName.LastName;
         }
     }
-    
-
  }
 
