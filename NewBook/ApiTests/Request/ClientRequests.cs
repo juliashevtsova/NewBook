@@ -69,7 +69,7 @@ namespace NewBook.ApiTests
             return clientChangePhoneNumber.phone_number;
         }
 
-        public static string SendRequestChangeGeneralInformationFirstNamePost(string first_name,string last_name, string token)
+        public static string SendRequestChangeGeneralInformationFirstNamePatch(string first_name,string last_name, string token)
         {
 
             var client = new RestClient("https://api.newbookmodels.com/api/v1/client/self/");
@@ -91,7 +91,7 @@ namespace NewBook.ApiTests
             return clientChangeName.FirstName;
         }
 
-        public static string SendRequestChangeGeneralInformationLastNamePost(string last_name, string token)
+        public static string SendRequestChangeGeneralInformationLastNamePatch(string last_name, string token)
         {
 
             var client = new RestClient("https://api.newbookmodels.com/api/v1/client/self/");
@@ -110,6 +110,25 @@ namespace NewBook.ApiTests
             var clientChangeName = JsonConvert.DeserializeObject<ClientChangeName>(response.Content);
 
             return clientChangeName.LastName;
+        }
+        public static string SendRequestChangeGeneralInfoLocationPatch(string locationName, string token)
+        {
+            var client = new RestClient("https://api.newbookmodels.com/api/v1/client/profile/");
+            var request = new RestRequest(Method.PATCH);
+            var newLocationModel = new Dictionary<string, string>
+            {
+                {"location_name", locationName }
+            };
+
+            request.AddHeader("content-type", "application/json");
+            request.AddHeader("authorization", token);
+            request.AddJsonBody(newLocationModel);
+            request.RequestFormat = DataFormat.Json;
+
+            var response = client.Execute(request);
+            var clientChangeLocation = JsonConvert.DeserializeObject<ClientChangelocation>(response.Content);
+
+            return clientChangeLocation.Location_name;
         }
     }
  }

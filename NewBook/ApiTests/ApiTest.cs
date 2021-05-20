@@ -82,7 +82,7 @@ namespace NewBook.ApiTests
 
             var crearedUser = AuthRequest.SendRequestClientSingUpPost(user);
 
-            var actualResult = ClientRequests.SendRequestChangeGeneralInformationFirstNamePost(expectedResult, crearedUser.User.LastName, crearedUser.TokenData.Token);
+            var actualResult = ClientRequests.SendRequestChangeGeneralInformationFirstNamePatch(expectedResult, crearedUser.User.LastName, crearedUser.TokenData.Token);
 
             Assert.AreEqual(expectedResult, actualResult);
         }
@@ -102,7 +102,28 @@ namespace NewBook.ApiTests
 
             var crearedUser = AuthRequest.SendRequestClientSingUpPost(user);
 
-            var actualResult = ClientRequests.SendRequestChangeGeneralInformationLastNamePost(expectedResult, crearedUser.TokenData.Token);
+            var actualResult = ClientRequests.SendRequestChangeGeneralInformationLastNamePatch(expectedResult, crearedUser.TokenData.Token);
+
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+        [Test]
+        public void CheckChangeGeneralInformationLocation()
+        {
+            var expectedResult = "1208 Hall St, Dallas, TX 75204, USA";
+
+            var user = new Dictionary<string, string>
+            {
+                { "email", $"julia{DateTime.Now:ddyyyymmHHssmmffff}@gmail.com" },
+                { "first_name", "Julz" },
+                { "last_name", "Sheva" },
+                { "password", "julia28091999A!" },
+                { "phone_number", "1234567890" }
+            };
+
+            var crearedUser = AuthRequest.SendRequestClientSingUpPost(user);
+
+            var actualResult = ClientRequests.SendRequestChangeGeneralInfoLocationPatch(expectedResult, crearedUser.TokenData.Token);
 
             Assert.AreEqual(expectedResult, actualResult);
         }
